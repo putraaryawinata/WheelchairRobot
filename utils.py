@@ -77,7 +77,7 @@ class ExtendedKalmanFilter:
         # dx/dv = dt
         # dx/da = 0
         # dv/dv = 1
-        # dv/da
+        # dv/da = dt
         jF = np.array([
             [dt, 0],
             [1, dt],
