@@ -152,21 +152,25 @@ class Animation:
         Input: must be a pair of x and y array, have a dimension of (n, 2)
         """
         self.n = args[0].shape[0]
-        self.x = np.zeros((len(args), self.n, 2))
-        self.y = np.zeros((len(args), self.n, 2))
+        self.x = np.zeros((len(args), self.n))
+        self.y = np.zeros((len(args), self.n))
         self.graph = []
         for index, arr in enumerate(args):
+            print(arr.shape)
+            print(index)
             self.x[index] = arr[:, 0]
             self.y[index] = arr[:, 1]
-            graph_index, = plt.plot([], [], 'o', label=f"graph {index+1}")
+            graph_index, = plt.plot([], [], 'o')
             self.graph.append(graph_index)
         
         self.xlim = [np.min(self.x), np.max(self.x)]
         self.ylim = [np.min(self.y), np.max(self.y)]
     
     def animate(self, i):
-        for index in range(self.graph):
-            self.graph[index].set_data(self.x[index,:i], self.y[index,:i])
+        print(len(self.graph))
+        print(i)
+        for index in range(len(self.graph)):
+            self.graph[index].set_data(self.x[index, :i+1], self.y[index, :i+1])
         return self.graph
     
     def build_animation(self, save_name="anim", ext="gif", fps=5):

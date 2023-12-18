@@ -16,7 +16,7 @@ def model_autoencoder(input_shape, ext_lstm_units, int_lstm_units, metrics=["mae
     us_1 = UpSampling1D()(decoder_1)
     flatten = Flatten()(us_1)
     fc = Dense(122, activation="relu")(flatten)
-    fc_1 = Dense(122, activation="relu")(fc)
+    fc_1 = Dense(122, activation="linear")(fc)
 
     output_layer = Reshape((61, 2))(fc_1)
 
