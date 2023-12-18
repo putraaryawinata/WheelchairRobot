@@ -149,15 +149,15 @@ class ExtendedKalmanFilter:
 class Animation:
     def __init__(self, *args):
         """
-        Input: must be a pair of x and y array, have a dimension of (2, n)
+        Input: must be a pair of x and y array, have a dimension of (n, 2)
         """
-        self.n = args[0].shape[1]
-        self.x = np.zeros((len(args), 2, self.n))
-        self.y = np.zeros((len(args), 2, self.n))
+        self.n = args[0].shape[0]
+        self.x = np.zeros((len(args), self.n, 2))
+        self.y = np.zeros((len(args), self.n, 2))
         self.graph = []
         for index, arr in enumerate(args):
-            self.x[index] = arr[0]
-            self.y[index] = arr[1]
+            self.x[index] = arr[:, 0]
+            self.y[index] = arr[:, 1]
             graph_index, = plt.plot([], [], 'o', label=f"graph {index+1}")
             self.graph.append(graph_index)
         
