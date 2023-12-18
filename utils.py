@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 class PositionDisplacement:
-    def __init__(self, acc_arr, dt):
+    def __init__(self, acc_arr, dt=1):
         self.acc_arr = acc_arr
         self.dt = dt
 
@@ -52,7 +52,7 @@ class ExtendedKalmanFilter:
         self.show_animation = show_animation
     
 
-    def motion_model(X, U, dt):
+    def motion_model(self, X, U, dt):
         # x.shape = (2, 1)
         F = np.array([[1.0, 0,],
                     [0, 1.0,]])
@@ -63,7 +63,7 @@ class ExtendedKalmanFilter:
         X = F @ X + B @ U
         return X
 
-    def observation_model(x):
+    def observation_model(self, x):
         H = np.array([
             [1, 0],
             [0, 1]
@@ -71,7 +71,7 @@ class ExtendedKalmanFilter:
         z = H @ x
         return z
 
-    def jacob_f(x, u, dt):
+    def jacob_f(self, x, u, dt):
         # x_t = x_{t-1} + v*dt
         # v_t = v_{t-1} + a*dt
         # hence:
@@ -85,7 +85,7 @@ class ExtendedKalmanFilter:
         ])
         return jF
 
-    def jacob_h():
+    def jacob_h(self):
         # Jacobian of Observation Model
         jH = np.array([
             [1, 0],
