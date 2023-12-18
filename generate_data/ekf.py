@@ -1,4 +1,8 @@
 import numpy as np
+parent_dir = "/home/aryawinata/belajar/WheelchairRobot"
+
+import sys
+sys.path.append(parent_dir)
 from utils import ExtendedKalmanFilter as EKF
 
 # EKF DATA
@@ -8,9 +12,9 @@ Require position data only
 ekf_pos = np.zeros((200, 61, 2))
 
 # Parameter EKF:
-noise_acc = np.load("data/noise_acc.npy")
-noise_velo = np.load("data/noise_velo.npy")
-noise_pos = np.load("data/noise_pos.npy")
+noise_acc = np.load(f"{parent_dir}/data/noise_acc.npy")
+noise_velo = np.load(f"{parent_dir}/data/noise_velo.npy")
+noise_pos = np.load(f"{parent_dir}/data/noise_pos.npy")
 dt = 1
 # Covariance for EKF simulation
 Q = np.diag([
@@ -35,7 +39,7 @@ for index in range(200):
     ekf_pos[index] = np.append(xEst[0, :61].reshape(-1, 1), yEst[0, :61].reshape(-1, 1), axis=1)
 
 try:
-    np.save("data/ekf_pos.npy", ekf_pos)
+    np.save(f"{parent_dir}/data/ekf_pos.npy", ekf_pos)
     print(f"Shape of ekf_pos: {ekf_pos.shape}")
     print("Success to create pos data for EKF signal")
 except:

@@ -1,6 +1,11 @@
 import numpy as np
-from utils import PositionDisplacement
+import os
 
+parent_dir = "/home/aryawinata/belajar/WheelchairRobot"
+
+import sys
+sys.path.append(parent_dir)
+from utils import PositionDisplacement
 
 # NOISE DATA
 """
@@ -12,8 +17,8 @@ noise_pos = np.zeros((200, 61, 2))
 for i in range(100):
     # data_1e-1
     ## define acceleration
-    x = np.load(f"data/data_1e-1/data_x_{i}.npy")
-    y = np.load(f"data/data_1e-1/data_y_{i}.npy")
+    x = np.load(f"{parent_dir}/data/data_1e-1/data_x_{i}.npy")
+    y = np.load(f"{parent_dir}/data/data_1e-1/data_y_{i}.npy")
 
     ## determine position and velocity:
     pdis_x = PositionDisplacement(x)
@@ -33,8 +38,8 @@ for i in range(100):
 
     # data_1e-1
     ## define acceleration
-    x = np.load(f"data/data_5e-1/data_x_{i}.npy")
-    y = np.load(f"data/data_5e-1/data_y_{i}.npy")
+    x = np.load(f"{parent_dir}/data/data_5e-1/data_x_{i}.npy")
+    y = np.load(f"{parent_dir}/data/data_5e-1/data_y_{i}.npy")
 
     ## determine position:
     pdis_x = PositionDisplacement(x)
@@ -53,11 +58,11 @@ for i in range(100):
     noise_pos[i+100] = acc_pos
 
 try:
-    np.save("data/noise_acc.npy", noise_acc)
+    np.save(f"{parent_dir}/data/noise_acc.npy", noise_acc)
     print(f"Shape of noise_acc: {noise_acc.shape}")
-    np.save("data/noise_velo.npy", noise_velo)
+    np.save(f"{parent_dir}/data/noise_velo.npy", noise_velo)
     print(f"Shape of noise_velo: {noise_acc.shape}")
-    np.save("data/noise_pos.npy", noise_pos)
+    np.save(f"{parent_dir}/data/noise_pos.npy", noise_pos)
     print(f"Shape of noise_pos: {noise_acc.shape}")
     print("Success to create acc, velo, and pos data for noise signal")
 except:
@@ -71,8 +76,8 @@ true_acc = np.zeros((200, 61, 2))
 true_pos = np.zeros((200, 61, 2))
 
 ## define acceleration
-x = np.load(f"data/data_true.npy")[:, 0]
-y = np.load(f"data/data_true.npy")[:, 1]
+x = np.load(f"{parent_dir}/data/data_true.npy")[:, 0]
+y = np.load(f"{parent_dir}/data/data_true.npy")[:, 1]
 
 ## determine position:
 pdis_x = PositionDisplacement(x)
@@ -81,13 +86,13 @@ pdis_y = PositionDisplacement(y)
 pos_y = pdis_y.s()
 
 for i in range(200):
-    true_acc[i] = np.load(f"data/data_true.npy")
+    true_acc[i] = np.load(f"{parent_dir}/data/data_true.npy")
     true_pos[i] = np.append(pos_x.reshape(-1, 1), pos_y.reshape(-1, 1), axis=1)
 
 try:
-    np.save("data/true_acc.npy", true_acc)
+    np.save(f"{parent_dir}/data/true_acc.npy", true_acc)
     print(f"Shape of true_acc: {true_acc.shape}")
-    np.save("data/true_pos.npy", true_pos)
+    np.save(f"{parent_dir}/data/true_pos.npy", true_pos)
     print(f"Shape of true_pos: {true_pos.shape}")
     print("Success to create acc and pos data for ground truth signal")
 except:
