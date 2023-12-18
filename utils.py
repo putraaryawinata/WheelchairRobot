@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 class PositionDisplacement:
     def __init__(self, acc_arr, dt):
@@ -144,3 +145,34 @@ class ExtendedKalmanFilter:
                 plt.grid(True)
                 plt.pause(0.001)
         return hxEst, hz
+
+class Animation:
+    def __init__(self, *args):
+        """
+        Input: must be a pair of x and y array, have a dimension of (2, n)
+        """
+        self.n = args[0].shape[1]
+        self.x = np.zeros((len(args), 2, self.n))
+        self.y = np.zeros((len(args), 2, self.n))
+        self.graph = []
+        for index, arr in enumerate(args):
+            self.x[index] = arr[0]
+            self.y[index] = arr[1]
+            graph_index, = plt.plot([], [], 'o', label=f"graph {index+1}")
+            self.graph.append(graph_index)
+        
+        self.xlim = [np.min(self.x), np.max(self.x)]
+        self.ylim = [np.min(self.y), np.max(self.y)]
+    
+    def animate(self, i):
+        for index in range(self.graph):
+            self.graph[index].set_data(self.x[index,:i], self.y[index,:i])
+        return self.graph
+    
+    def build_animation(self, save_name="anim", ext="gif", fps=5):
+         fig = plt.figure()
+         plt.xlim(self.xlim[0], self.xlim[1])
+         plt.ylim(self.ylim[0], self.ylim[1])
+
+         ani = animation.FuncAnimation(fig, self.animate, frames=self.n, interval=200)
+         ani.save(f"{save_name}.{ext}", writer='ffmpeg', fps=fps)
