@@ -19,8 +19,9 @@ if __name__ == "__main__":
     input_shape = x_train.shape[1:]
 
     # Build Model
-    model = model_autoencoder(input_shape, ext_lstm_units=32, int_lstm_units=16, metrics=[R_squared])
+    model = model_autoencoder(input_shape, ext_lstm_units=16, int_lstm_units=32, metrics=["mae", R_squared])
     model.summary()
     history = model.fit(x_train, y_train, epochs=1000, validation_data=(x_test, y_test), callbacks=[early_stopping])
-    
+    print(f"Training stops!")
+    model.save("autoencoder.h5")
     
