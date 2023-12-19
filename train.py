@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     # Data Preprocessing
     input_data = np.load("data/noise_acc.npy")
-    gt_data = np.load("data/true_pos.npy")
+    gt_data = np.load("data/true_acc.npy")
 
     x_train, x_test, y_train, y_test = train_test_split(input_data, gt_data, test_size=0.2, random_state=42)
     input_shape = x_train.shape[1:]
@@ -23,5 +23,5 @@ if __name__ == "__main__":
     model.summary()
     history = model.fit(x_train, y_train, epochs=1000, validation_data=(x_test, y_test), callbacks=[early_stopping])
     print(f"Training stops!")
-    model.save("generate_data/autoencoder.h5")
+    model.save("generate_data/ae_acc2acc.h5")
     
