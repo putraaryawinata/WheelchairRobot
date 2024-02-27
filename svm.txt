@@ -1,0 +1,18 @@
+(tfod) (base) aryawinata@LAPTOP-ORV077OO:~/belajar/WheelchairRobot$ python generate_data/svm.py 
+(3000, 3)
+(3000, 1)
+/home/aryawinata/.local/lib/python3.10/site-packages/sklearn/utils/validation.py:1143: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+[[143   0  74]
+ [  0 183  14]
+ [ 46  16 124]]
+0.75
+(tfod) (base) aryawinata@LAPTOP-ORV077OO:~/belajar/WheelchairRobot$ python generate_data/svm.py 
+(3000, 3)
+(3000, 1)
+/home/aryawinata/.local/lib/python3.10/site-packages/sklearn/utils/validation.py:1143: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+[[0.23833333 0.         0.12333333]
+ [0.         0.305      0.02333333]
+ [0.07666667 0.02666667 0.20666667]]
+0.75

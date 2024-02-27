@@ -18,8 +18,8 @@ noise_pos = np.load(f"{parent_dir}/data/noise_pos.npy")
 dt = 1
 # Covariance for EKF simulation
 Q = np.diag([
-    0.1,  # variance of location on x-axis
-    1.0  # variance of velocity
+    0.01,  # variance of location on position
+    0.1  # variance of velocity
 ]) ** 2  # predict state covariance
 R = np.diag([1.0]) ** 2  # Observation x position covariance
 

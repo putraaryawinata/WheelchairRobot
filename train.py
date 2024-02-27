@@ -23,5 +23,5 @@ if __name__ == "__main__":
     model.summary()
     history = model.fit(x_train, y_train, epochs=1000, validation_data=(x_test, y_test), callbacks=[early_stopping])
     print(f"Training stops!")
-    model.save("generate_data/ae_acc2acc.h5")
+    # model.save("generate_data/test.h5")
     
