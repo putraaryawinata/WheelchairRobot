@@ -1,4 +1,5 @@
 *.zip
-data/*
 __pycache__/*
 visual/*
+data/data_1e-1/*
+data/data_5e-1/*
